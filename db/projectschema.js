@@ -42,5 +42,7 @@ var projectSchema = new object.mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId
         , ref: 'users'
     }]
+    , keywords: []
+    , sourcecode: []
 });
 module.exports = object.db.model('projects', projectSchema);

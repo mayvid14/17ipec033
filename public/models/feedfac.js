@@ -1,8 +1,8 @@
 app.factory('feedfac', function ($http, $q) {
     return {
-        getposts: function () {
+        getprojects: function () {
             var q = $q.defer();
-            $http.post('/getposts').then(function (data) {
+            $http.post('/getprojects').then(function (data) {
                 q.resolve(data);
             }, function (err) {
                 q.reject(err);

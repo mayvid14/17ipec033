@@ -5,9 +5,9 @@ app.config(function($routeProvider){
     }).when('/profile/:id',{
         templateUrl:'../views/profile.html',
         controller:'profilectrl'
-    }).when('/post/:pid',{
-        templateUrl:'../views/post.html',
-        controller:'postctrl'
+    }).when('/project/:pid',{
+        templateUrl:'../views/project.html',
+        controller:'projectctrl'
     }).when('/post/:pid/:cid',{
         templateUrl:'../views/post.html',
         controller:'postctrl'

@@ -1,7 +1,7 @@
 <md-dialog>
     <md-toolbar>
         <div class="md-toolbar-tools">
-            <h2>Write a new post...</h2> <span flex></span>
+            <h2>Create a new project...</h2> <span flex></span>
             <md-button class="md-icon-button" ng-click="cancel()">
                 <md-icon>close</md-icon>
             </md-button>
@@ -21,7 +21,7 @@
                 </div>
                 <div flex layout="column">
                     <md-input-container class="md-block md-hue-1" flex="50">
-                        <label>Description</label>
+                        <label>Abstract</label>
                         <textarea name="desc" cols="30" ng-model="postDescription" required></textarea>
                         <div ng-messages="postup.desc.$error" ng-show="postup.desc.$dirty">
                             <div ng-message="required">This is required!</div>
@@ -32,14 +32,14 @@
                 <div flex>
                     <md-input-container>
                         <md-button class="md-fab" ngf-select ng-model="postPic" accept="image/*" name="file" ngf-max-size="10MB">
-                            <md-tooltip md-direction="right">Open a photo</md-tooltip>
+                            <md-tooltip md-direction="right">Attach a screenshot</md-tooltip>
                             <md-icon>photo</md-icon>
                         </md-button>
                     </md-input-container>
                 </div>
                 <div flex>
                     <md-input-container><span flex></span>
-                        <md-button class="md-raised md-cornered md-primary" ng-disabled="postup.$invalid" ng-click="postupload()"> Submit </md-button>
+                        <md-button class="md-raised md-cornered md-primary" ng-disabled="postup.$invalid" ng-click="projectupload()"> Submit </md-button>
                     </md-input-container>
                 </div>
             </form>

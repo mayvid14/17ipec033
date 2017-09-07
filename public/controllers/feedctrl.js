@@ -1,8 +1,8 @@
 app.controller('feedctrl', ['$scope', '$sessionStorage', '$window', '$mdSidenav', '$mdDialog', 'feedfac', function ($scope, $sessionStorage, $window, $mdSidenav, $mdDialog, feedfac) {
     if (!$sessionStorage.get('user')) $window.location.href = '/login';
     else $scope.user = $sessionStorage.get('user');
-    feedfac.getposts().then(function (data) {
-        $scope.posts = data.data;
+    feedfac.getprojects().then(function (data) {
+        $scope.projects = data.data;
     }, function (err) {
         alert('error : ' + err);
     });
@@ -21,8 +21,8 @@ app.controller('feedctrl', ['$scope', '$sessionStorage', '$window', '$mdSidenav'
             , clickOutsideToClose: true
             , fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
         }).then(function (ans) {
-            feedfac.getposts().then(function (data) {
-                $scope.posts = data.data;
+            feedfac.getprojects().then(function (data) {
+                $scope.projects = data.data;
             }, function (err) {
                 alert('error : ' + err);
             });
@@ -30,8 +30,8 @@ app.controller('feedctrl', ['$scope', '$sessionStorage', '$window', '$mdSidenav'
             $scope.status = 'You cancelled the dialog.';
         });
     };
-    $scope.openpost = function(pid){
-        $window.location.href="/#post/#"+pid;
+    $scope.openproject = function(pid){
+        $window.location.href="/#project/#"+pid;
     };
     function DialogController($scope, Upload, $sessionStorage, $mdDialog) {
         $scope.hide = function (ans) {
@@ -41,9 +41,9 @@ app.controller('feedctrl', ['$scope', '$sessionStorage', '$window', '$mdSidenav'
             $mdDialog.cancel();
         }
         $scope.user = $sessionStorage.get('user');
-        $scope.postupload = function () {
+        $scope.projectupload = function () {
             Upload.upload({
-                url: '/newpost'
+                url: '/newproject'
                 , method: 'POST'
                 , data: {
                     uid: $scope.user._id

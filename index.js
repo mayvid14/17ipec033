@@ -25,7 +25,6 @@ var upload = multer({
 var dbfunc = require(path.join(__dirname, 'db', 'dbfunctions.js'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/nm', express.static(path.join(__dirname, 'node_modules')));
-app.set('port', process.env.PORT || 1357);
 app.use(session({
     cookieName: 'session'
     , secret: 'appearances are deceiving'
@@ -71,14 +70,13 @@ app.post('/logout', function (req, res) {
     req.session.reset();
     res.redirect('/login');
 });
-/*-------------------------------------------------------------------------*/
-app.post('/newpost', requireLogin, upload.single('file'), jsonenc, function (req, res) {
+app.post('/newproject', requireLogin, upload.single('file'), jsonenc, function (req, res) {
     var picurl = '';
     if (typeof req.file === 'undefined') picurl = '';
     else picurl = '../resources/' + req.file.filename;
-    dbfunc.newPost(req.body.uid, req.body.title, req.body.description, picurl, res);
+    dbfunc.newProject(req.body.uid, req.body.title, req.body.description, picurl, res);
 });
-app.post('/getproject', requireLogin, function (req, res) {
+app.post('/getprojects', requireLogin, function (req, res) {
     dbfunc.getProject(res);
 });
 app.post('/discuss', requireLogin, jsonenc, function (req, res) {
@@ -118,6 +116,6 @@ app.post('/updatepost', requireLogin, upload.single('file'), jsonenc, function (
 app.post('/updatecomment', requireLogin, jsonenc, function (req, res) {
     dbfunc.upComment(req.body.cid, req.body.comment, res);
 });*/
-app.listen(app.get('port'), function () {
-    console.log('Connected to 8080');
+app.listen(2468, function () {
+    console.log('Connected to 2468');
 });

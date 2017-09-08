@@ -18,5 +18,5 @@ app.filter('getDur', function () {
     }
 });
 app.config(function ($mdThemingProvider) {
-    $mdThemingProvider.theme('default').primaryPalette('pink').accentPalette('teal');
+    $mdThemingProvider.theme('default').primaryPalette('indigo').accentPalette('blue-grey');
 });

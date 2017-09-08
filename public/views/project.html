@@ -8,8 +8,9 @@
         <md-card-header>
             <md-card-avatar> <img class="md-user-avatar" ng-src="{{project.userId.dp}}" /> </md-card-avatar>
             <md-card-header-text> <a class="md-title md-primary" ng-href="/#!profile/{{project.userId._id}}">{{project.userId.name}}</a> <span class="md-subhead">Posted {{project.createdOn | getDur}}</span> </md-card-header-text>
-            <md-button class="md-secondary md-accent md-icon-button" ng-if="canEdit" ng-click="editproject($event)">
-                <md-tooltip md-direction="left">Edit project</md-tooltip>
+            <label for="editt" style="padding-top: 7px">Add sourcecode file here 👉</label>
+            <md-button class="md-secondary md-accent md-icon-button" ng-if="canEdit" ng-click="editproject($event)" name="editt">
+                <md-tooltip md-direction="bottom">Edit project</md-tooltip>
                 <md-icon>edit</md-icon>
             </md-button>
             <!--<md-button class="md-secondary md-accent md-icon-button" ng-if="canEdit">

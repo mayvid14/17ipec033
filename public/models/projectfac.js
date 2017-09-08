@@ -1,8 +1,8 @@
-app.factory('postfac', function ($q, $http) {
+app.factory('projectfac', function ($q, $http) {
     return {
         openpost: function (pid) {
             var q = $q.defer();
-            $http.post('/post', {
+            $http.post('/project', {
                 id: pid
             }).then(function (data) {
                 q.resolve(data);
@@ -13,7 +13,7 @@ app.factory('postfac', function ($q, $http) {
         }
         , comment: function (uid, com, pid) {
             var q = $q.defer();
-            $http.post('/comment', {
+            $http.post('/discuss', {
                 uid: uid
                 , com: com
                 , pid: pid
@@ -24,9 +24,9 @@ app.factory('postfac', function ($q, $http) {
             });
             return q.promise;
         }
-        , uvpost: function (uid, pid) {
+        , obpost: function (uid, pid) {
             var q = $q.defer();
-            $http.post('/uvpost', {
+            $http.post('/obpost', {
                 uid: uid
                 , pid: pid
             }).then(function (data) {
@@ -36,9 +36,45 @@ app.factory('postfac', function ($q, $http) {
             });
             return q.promise;
         }
-        , dvpost: function (uid, pid) {
+        , cpost: function (uid, pid) {
             var q = $q.defer();
-            $http.post('/dvpost', {
+            $http.post('/cpost', {
+                uid: uid
+                , pid: pid
+            }).then(function (data) {
+                q.resolve(data);
+            }, function (err) {
+                q.reject(err);
+            });
+            return q.promise;
+        }
+        , ipost: function (uid, pid) {
+            var q = $q.defer();
+            $http.post('/ipost', {
+                uid: uid
+                , pid: pid
+            }).then(function (data) {
+                q.resolve(data);
+            }, function (err) {
+                q.reject(err);
+            });
+            return q.promise;
+        }
+        , opost: function (uid, pid) {
+            var q = $q.defer();
+            $http.post('/opost', {
+                uid: uid
+                , pid: pid
+            }).then(function (data) {
+                q.resolve(data);
+            }, function (err) {
+                q.reject(err);
+            });
+            return q.promise;
+        }
+        , rpost: function (uid, pid) {
+            var q = $q.defer();
+            $http.post('/rpost', {
                 uid: uid
                 , pid: pid
             }).then(function (data) {

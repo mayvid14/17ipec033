@@ -8,9 +8,9 @@ app.config(function($routeProvider){
     }).when('/project/:pid',{
         templateUrl:'../views/project.html',
         controller:'projectctrl'
-    }).when('/post/:pid/:cid',{
-        templateUrl:'../views/post.html',
-        controller:'postctrl'
+    }).when('/project/:pid/:cid',{
+        templateUrl:'../views/project.html',
+        controller:'projectctrl'
     }).otherwise({
         redirectTo:'/'
     });

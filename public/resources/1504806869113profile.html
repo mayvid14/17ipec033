@@ -1,14 +1,14 @@
 <md-toolbar layout="row" class="md-primary">
     <div class="md-toolbar-tools">
         <md-button hide-gt-sm ng-click="toggle()">
-            <md-icon class="md-primary">menu</md-icon>17IPEC033</md-button> <span>Profile</span> </div>
+            <md-icon class="md-primary">menu</md-icon>SHIP</md-button> <span>Profile</span> </div>
 </md-toolbar>
 <div layout="row" layout-align="center center">
     <md-card flex-gt-xs="40" flex="90"> <img ng-src="{{profile.dp}}" alt="">
         <md-card-title>
             <md-card-title-text layout-margin>
-                <p class="md-headline">{{profile.name}}</p>
-                </md-card-title-text>
+                <p class="md-headline">{{profile.firstname | initcap}} {{profile.lastname | initcap}}</p>
+                <p class="md-subhead">{{profile.bio}}</p> </md-card-title-text>
             <div layout="row" layout-align="end center">
                 <md-button class="md-fab" aria-label="Edit" ng-click="showPrompt($event)" ng-if="showEdit">
                     <md-tooltip md-direction="left"> Edit your profile </md-tooltip>
@@ -16,7 +16,7 @@
                 </md-button>
             </div>
         </md-card-title>
-        <!--<md-card-content>
+        <md-card-content>
             <p>
                 <md-icon class="md-primary">favorite</md-icon> on posts: {{profile.postfav.length}}</p>
             <p>
@@ -25,47 +25,47 @@
                 <md-icon class="md-primary">favorite</md-icon> on comments: {{profile.comfav.length}}</p>
             <p>
                 <md-icon class="md-accent">sentiment_very_dissatisfied</md-icon> on comments: {{profile.comsad.length}}</p>
-        </md-card-content>-->
+        </md-card-content>
     </md-card>
 </div>
 <div layout="row" layout-align="center center" layout-padding layout-xs="column" layout-align-xs="center stretch">
     <div flex-gt-xs="50">
         <md-list>
-            <md-subheader class="md-no-sticky">Projects</md-subheader>
-            <md-list-item class="md-3-line" ng-repeat="item in posts" ng-href="/#!project/{{item._id}}"> <img ng-src="{{item.userId.dp}}" class="md-avatar" alt="{{item.who}}" />
+            <md-subheader class="md-no-sticky">Posts</md-subheader>
+            <md-list-item class="md-3-line" ng-repeat="item in posts" ng-href="/#!post/{{item._id}}"> <img ng-src="{{item.userId.dp}}" class="md-avatar" alt="{{item.who}}" />
                 <div class="md-list-item-text" layout="column">
                     <h3>{{ item.title}}</h3>
                     <h4 class="md-caption">{{ item.createdOn | getDur }}</h4>
-                    <p>{{ item.abstract }}</p>
-                    <!--<div class="md-secondary">
+                    <p>{{ item.description }}</p>
+                    <div class="md-secondary">
                         <md-icon aria-label="Chat" class="md-primary">favorite</md-icon><span layout-padding>{{item.fav.length}}</span></div>
                     <div class="md-secondary">
-                        <md-icon aria-label="Chat" class="md-accent">sentiment_very_dissatisfied</md-icon><span layout-padding>{{item.sad.length}}</span></div>-->
+                        <md-icon aria-label="Chat" class="md-accent">sentiment_very_dissatisfied</md-icon><span layout-padding>{{item.sad.length}}</span></div>
                     <md-divider></md-divider>
                 </div>
             </md-list-item>
             <md-list-item ng-if="posts.length===0">
-                <p>No projects yet</p>
+                <p>No posts yet</p>
             </md-list-item>
         </md-list>
     </div>
     <div flex-gt-xs="50">
         <md-list>
-            <md-subheader class="md-no-sticky">Discussions</md-subheader>
-            <md-list-item class="md-3-line" ng-repeat="item in comments" ng-href="/#!project/{{item.projectId}}/{{item._id}}"> <img ng-src="{{item.userId.dp}}" class="md-avatar" alt="{{item.who}}" />
+            <md-subheader class="md-no-sticky">Comments</md-subheader>
+            <md-list-item class="md-3-line" ng-repeat="item in comments" ng-href="/#!post/{{item.postId}}/{{item._id}}"> <img ng-src="{{item.userId.dp}}" class="md-avatar" alt="{{item.who}}" />
                 <div class="md-list-item-text" layout="column">
                     <!--<h3>{{ item.title}}</h3>-->
                     <h4 class="md-caption">{{ item.createdOn | getDur }}</h4>
                     <p>{{ item.comment }}</p>
-                    <!--<div class="md-secondary">
+                    <div class="md-secondary">
                         <md-icon aria-label="Chat" class="md-primary">favorite</md-icon><span layout-padding>{{item.fav.length}}</span></div>
                     <div class="md-secondary">
-                        <md-icon aria-label="Chat" class="md-accent">sentiment_very_dissatisfied</md-icon><span layout-padding>{{item.sad.length}}</span></div>-->
+                        <md-icon aria-label="Chat" class="md-accent">sentiment_very_dissatisfied</md-icon><span layout-padding>{{item.sad.length}}</span></div>
                     <md-divider></md-divider>
                 </div>
             </md-list-item>
             <md-list-item ng-if="comments.length===0">
-                <p>No discussions yet</p>
+                <p>No comments yet</p>
             </md-list-item>
         </md-list>
     </div>

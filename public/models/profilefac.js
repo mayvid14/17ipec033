@@ -11,13 +11,11 @@ app.factory('profilefac', function ($q, $http) {
             });
             return q.promise;
         }
-        , updateProfile: function (fn, ln, bio, id) {
+        , updateProfile: function (n, id) {
             var q = $q.defer();
             $http.post('/profup', {
                 id: id
-                , fn: fn
-                , ln: ln
-                , bio: bio
+                , n: n
             }).then(function (data) {
                 q.resolve(data);
             }, function (err) {

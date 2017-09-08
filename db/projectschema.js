@@ -14,10 +14,6 @@ var projectSchema = new object.mongoose.Schema({
         type: String
         , default: Date.now
     }
-    , image: {
-        type: String
-        , default: ''
-    }
     , userId: {
         type: mongoose.Schema.Types.ObjectId
         , ref: 'users'
@@ -34,7 +30,7 @@ var projectSchema = new object.mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId
         , ref: 'users'
     }]
-    , irreletaive: [{
+    , irrelevant: [{
         type: mongoose.Schema.Types.ObjectId
         , ref: 'users'
     }]

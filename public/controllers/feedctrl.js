@@ -16,7 +16,7 @@ app.controller('feedctrl', ['$scope', '$sessionStorage', '$window', '$mdSidenav'
     $scope.showAdvanced = function (ev) {
         $mdDialog.show({
             controller: DialogController
-            , templateUrl: '../views/dialog1.tmpl.html'            
+            , templateUrl: '../views/dialog1.tmpl.html'
             , targetEvent: ev
             , clickOutsideToClose: true
             , fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
@@ -30,14 +30,29 @@ app.controller('feedctrl', ['$scope', '$sessionStorage', '$window', '$mdSidenav'
             $scope.status = 'You cancelled the dialog.';
         });
     };
-    $scope.openproject = function(pid){
-        $window.location.href="/#project/#"+pid;
+    $scope.openproject = function (pid) {
+        $window.location.href = "/#project/#" + pid;
     };
+    $scope.search = '';
+    $scope.srch = function (item) {
+        return item.title.toLowerCase().includes($scope.search.toLowerCase()) || item.abstract.toLowerCase().includes($scope.search.toLowerCase());
+    }
+    $scope.sot=false;
+    $scope.ordor = function (item) {
+        if($scope.sot) return;
+        var ob = item.outofthebox.length;
+        var o = item.okay.length;
+        var i = item.innovative.length;
+        var c = item.cool.length;
+        var r = item.irrelevant.length;
+        return -(ob*3+c*2+i-r);
+    }
+
     function DialogController($scope, Upload, $sessionStorage, $mdDialog) {
         $scope.hide = function (ans) {
             $mdDialog.hide(ans);
         };
-        $scope.cancel = function(){
+        $scope.cancel = function () {
             $mdDialog.cancel();
         }
         $scope.user = $sessionStorage.get('user');
@@ -49,7 +64,7 @@ app.controller('feedctrl', ['$scope', '$sessionStorage', '$window', '$mdSidenav'
                     uid: $scope.user._id
                     , title: $scope.postTitle
                     , description: $scope.postDescription
-                    , file: $scope.postPic
+                    , file: $scope.filer
                 }
             , }).then(function (response) {
                 $scope.hide('yolo');
@@ -58,6 +73,7 @@ app.controller('feedctrl', ['$scope', '$sessionStorage', '$window', '$mdSidenav'
             }, function (evt) {
                 console.log('Uploading', 100);
             });
+            //console.log($scope.file);
         };
     }
 }]);

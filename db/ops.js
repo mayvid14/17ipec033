@@ -22,7 +22,6 @@ module.exports = {
         var project = new projects({
             title: title
             , abstract: desc
-            , image: url
             , userId: uid
             , cool: []
             , innovative: []
@@ -30,7 +29,7 @@ module.exports = {
             , irreletaive: []
             , outofthebox: []
             , keywords: []
-            , sourcecode: []
+            , sourcecode: [url]
         });
         return project.save();
     }
@@ -73,78 +72,113 @@ module.exports = {
         }).populate('userId', 'dp name _id').exec();
     }
     , updateProfile: function (n, id) {
-            return users.findOneAndUpdate({
-                _id: id
-            }, {
-                $set: {
-                    name: n
-                }
-            }, {
-                new: true
-            }).exec();
-        }
-        /*, upvotepost: function (uid, pid) {
-            return posts.findOneAndUpdate({
+        return users.findOneAndUpdate({
+            _id: id
+        }, {
+            $set: {
+                name: n
+            }
+        }, {
+            new: true
+        }).exec();
+    }
+    , obpost: function (uid, pid) {
+        return projects.findOneAndUpdate({
+            _id: pid
+        }, {
+            $addToSet: {
+                outofthebox: uid
+            }
+        }, {
+            new: true
+        }).exec();
+    }
+    , opost: function (uid, pid) {
+        return projects.findOneAndUpdate({
+            _id: pid
+        }, {
+            $addToSet: {
+                okay: uid
+            }
+        }, {
+            new: true
+        }).exec();
+    }
+    , cpost: function (uid, pid) {
+        return projects.findOneAndUpdate({
+            _id: pid
+        }, {
+            $addToSet: {
+                cool: uid
+            }
+        }, {
+            new: true
+        }).exec();
+    }
+    , ipost: function (uid, pid) {
+        return projects.findOneAndUpdate({
+            _id: pid
+        }, {
+            $addToSet: {
+                innovative: uid
+            }
+        }, {
+            new: true
+        }).exec();
+    }
+    , rpost: function (uid, pid) {
+            return projects.findOneAndUpdate({
                 _id: pid
             }, {
                 $addToSet: {
-                    fav: uid
+                    irrelevant: uid
                 }
             }, {
                 new: true
             }).exec();
         }
-        , adduvpostdata: function (puid, pid, uid) {
-            return users.findOneAndUpdate({
-                _id: puid
-            }, {
-                $addToSet: {
-                    postfav: {
-                        pid: pid
-                        , uid: uid
+        /*
+            , adduvpostdata: function (puid, pid, uid) {
+                return users.findOneAndUpdate({
+                    _id: puid
+                }, {
+                    $addToSet: {
+                        postfav: {
+                            pid: pid
+                            , uid: uid
+                        }
                     }
-                }
-            }, {
-                new: true
-            }).exec();
-        }
-        , downvotepost: function (uid, pid) {
-            return posts.findOneAndUpdate({
-                _id: pid
-            }, {
-                $addToSet: {
-                    sad: uid
-                }
-            }, {
-                new: true
-            }).exec();
-        }
-        , adddownpostdata: function (puid, pid, uid) {
-            return users.findOneAndUpdate({
-                _id: puid
-            }, {
-                $addToSet: {
-                    postsad: {
-                        pid: pid
-                        , uid: uid
+                }, {
+                    new: true
+                }).exec();
+            }
+            , adddownpostdata: function (puid, pid, uid) {
+                return users.findOneAndUpdate({
+                    _id: puid
+                }, {
+                    $addToSet: {
+                        postsad: {
+                            pid: pid
+                            , uid: uid
+                        }
                     }
-                }
-            }, {
-                new: true
-            }).exec();
-        }
-        , upvotecomment: function (uid, cid) {
-            return comments.findOneAndUpdate({
+                }, {
+                    new: true
+                }).exec();
+            }*/
+        
+    , upvotecomment: function (uid, cid) {
+            return discuss.findOneAndUpdate({
                 _id: cid
             }, {
                 $addToSet: {
-                    fav: uid
+                    upvote: uid
                 }
             }, {
                 new: true
             }).exec();
         }
-        , adduvcommentdata: function (cuid, cid, uid) {
+        /*, adduvcommentdata: function (cuid, cid, uid) {
             return users.findOneAndUpdate({
                 _id: cuid
             }, {
@@ -157,66 +191,71 @@ module.exports = {
             }, {
                 new: true
             }).exec();
-        }
-        , downvotecomment: function (uid, cid) {
-            return comments.findOneAndUpdate({
+        }*/
+        
+    , downvotecomment: function (uid, cid) {
+            return discuss.findOneAndUpdate({
                 _id: cid
             }, {
                 $addToSet: {
-                    sad: uid
+                    downvote: uid
                 }
             }, {
                 new: true
             }).exec();
         }
-        , adddowncommentdata: function (cuid, cid, uid) {
-            return users.findOneAndUpdate({
-                _id: cuid
-            }, {
-                $addToSet: {
-                    comsad: {
-                        cid: cid
-                        , uid: uid
-                    }
-                }
-            }, {
-                new: true
-            }).exec();
-        }*/
-        /*, updatePost: function (pid, title, desc, url) {
-            return posts.findOneAndUpdate({
-                _id: pid
-            }, {
-                $set: {
-                    title: title
-                    , description: desc
-                    , image: url
-                }
-            }, {
-                new: true
-            }).exec();
-        }
-        , updatePostNP: function (pid, title, desc) {
-            return posts.findOneAndUpdate({
-                _id: pid
-            }, {
-                $set: {
-                    title: title
-                    , description: desc
-                }
-            }, {
-                new: true
-            }).exec();
-        }
-        , updateComment: function (cid, com) {
-            return comments.findOneAndUpdate({
-                _id: cid
-            }, {
-                $set: {
-                    comment: com
-                }
-            }, {
-                new: true
-            }).exec();
-        }*/
+        /*
+                , adddowncommentdata: function (cuid, cid, uid) {
+                    return users.findOneAndUpdate({
+                        _id: cuid
+                    }, {
+                        $addToSet: {
+                            comsad: {
+                                cid: cid
+                                , uid: uid
+                            }
+                        }
+                    }, {
+                        new: true
+                    }).exec();
+                }*/
+        
+    , updatePost: function (pid, title, desc, url) {
+        return projects.findOneAndUpdate({
+            _id: pid
+        }, {
+            $set: {
+                title: title
+                , abstract: desc
+            }
+            , $addToSet: {
+                sourcecode: url
+            }
+        }, {
+            new: true
+        }).exec();
+    }
+    , updatePostNP: function (pid, title, desc) {
+        return projects.findOneAndUpdate({
+            _id: pid
+        }, {
+            $set: {
+                title: title
+                , abstract: desc
+            }
+        }, {
+            new: true
+        }).exec();
+    }
+    , updateComment: function (cid, com) {
+        return discuss.findOneAndUpdate({
+            _id: cid
+        }, {
+            $set: {
+                comment: com
+            }
+        }, {
+            new: true
+        }).exec();
+    }
 };

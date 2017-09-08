@@ -77,7 +77,7 @@ module.exports = {
         return Promise.join(a, b, function (pdata, ddata) {
             res.send({
                 pdata: pdata
-                , ddata: cdata
+                , ddata: ddata
             });
         });
     }
@@ -107,93 +107,123 @@ module.exports = {
         });
     }
     , profup: function (n, id, res) {
-            ops.updateProfile(n, id).then(function (data) {
-                res.send(data);
+        ops.updateProfile(n, id).then(function (data) {
+            res.send(data);
+        });
+    }
+    , obpost: function (uid, pid, res) {
+        var a = ops.obpost(uid, pid);
+        var b = a.then(function (ndata) {
+            return ops.discussionOfPost(pid);
+        });
+        return Promise.join(a, b, function (ndata, cdata) {
+            res.send({
+                pdata: ndata
+                , cdata: cdata
             });
-        }
-        /* , uvpost: function (uid, pid, res) {
-             var a = ops.upvotepost(uid, pid);
-             var c = a.then(function (pdata) {
-                 return ops.adduvpostdata(pdata.userId,pid, uid);
-             });
-             var b = c.then(function (ndata) {
-                 return ops.commentsOfPost(pid);
-             });
-             return Promise.join(a, c, b, function (pdata, ndata, cdata) {
-                 res.send({
-                     pdata: pdata
-                     , cdata: cdata
-                 });
-             });
-         }
-         , dvpost: function (uid, pid, res) {
-             var a = ops.downvotepost(uid, pid);
-             var c = a.then(function (pdata) {
-                 return ops.adddownpostdata(pdata.userId,pid, uid);
-             });
-             var b = c.then(function (ndata) {
-                 return ops.commentsOfPost(pid);
-             });
-             return Promise.join(a, c, b, function (pdata, ndata, cdata) {
-                 res.send({
-                     pdata: pdata
-                     , cdata: cdata
-                 });
-             });
-         }
-         , uvcomment: function (uid, pid, cid, res) {
-             var a = ops.upvotecomment(uid, cid);
-             var c = a.then(function (ctdata) {
-                 return ops.adduvcommentdata(ctdata.userId,cid, uid);
-             });
-             var b = c.then(function (ndata) {
-                 return ops.commentsOfPost(pid);
-             });
-             return Promise.join(a, c, b, function (ctdata, ndata, cdata) {
-                 res.send({
-                     cdata: cdata
-                 });
-             });
-         }
-         , dvcomment: function (uid, pid, cid, res) {
-             var a = ops.downvotecomment(uid, cid);
-             var c = a.then(function (ctdata) {
-                 return ops.adddowncommentdata(ctdata.userId,cid, uid);
-             });
-             var b = c.then(function (ndata) {
-                 return ops.commentsOfPost(pid);
-             });
-             return Promise.join(a, c, b, function (ctdata, ndata, cdata) {
-                 res.send({
-                     cdata: cdata
-                 });
-             });
-         }
-         , updatePost: function (pid, title, desc, url, res) {
-             var p = ops.updatePost(pid, title, desc, url);
-             p.then(function (data) {
-                 res.sendStatus(200);
-             }, function (err) {
-                 console.log(err);
-                 throw err;
-             });
-         }
-         , updatePostNP: function (pid, title, desc, res) {
-             var p = ops.updatePostNP(pid, title, desc);
-             p.then(function (data) {
-                 res.sendStatus(200);
-             }, function (err) {
-                 console.log(err);
-                 throw err;
-             });
-         }
-         , upComment: function (cid, com, res) {
-             ops.updateComment(cid, com).then(function (comdata) {
-                 return ops.commentsOfPost(comdata.postId);
-             }).then(function (cdata) {
-                 res.send({
-                     cdata: cdata
-                 });
-             });
-         }*/
+        });
+    }
+    , opost: function (uid, pid, res) {
+        var a = ops.opost(uid, pid);
+        var b = a.then(function (ndata) {
+            return ops.discussionOfPost(pid);
+        });
+        return Promise.join(a, b, function (ndata, cdata) {
+            res.send({
+                pdata: ndata
+                , cdata: cdata
+            });
+        });
+    }
+    , cpost: function (uid, pid, res) {
+        var a = ops.cpost(uid, pid);
+        var b = a.then(function (ndata) {
+            return ops.discussionOfPost(pid);
+        });
+        return Promise.join(a, b, function (ndata, cdata) {
+            res.send({
+                pdata: ndata
+                , cdata: cdata
+            });
+        });
+    }
+    , ipost: function (uid, pid, res) {
+        var a = ops.ipost(uid, pid);
+        var b = a.then(function (ndata) {
+            return ops.discussionOfPost(pid);
+        });
+        return Promise.join(a, b, function (ndata, cdata) {
+            res.send({
+                pdata: ndata
+                , cdata: cdata
+            });
+        });
+    }
+    , rpost: function (uid, pid, res) {
+        var a = ops.rpost(uid, pid);
+        var b = a.then(function (ndata) {
+            return ops.discussionOfPost(pid);
+        });
+        return Promise.join(a, b, function (ndata, cdata) {
+            res.send({
+                pdata: ndata
+                , cdata: cdata
+            });
+        });
+    }
+    , uvcomment: function (uid, pid, cid, res) {
+        var a = ops.upvotecomment(uid, cid);
+        /*var c = a.then(function (ctdata) {
+            return ops.adduvcommentdata(ctdata.userId,cid, uid);
+        });*/
+        var b = a.then(function (ndata) {
+            return ops.discussionOfPost(pid);
+        });
+        return Promise.join(a, b, function (ndata, cdata) {
+            res.send({
+                ddata: cdata
+            });
+        });
+    }
+    , dvcomment: function (uid, pid, cid, res) {
+        var a = ops.downvotecomment(uid, cid);
+        /*var c = a.then(function (ctdata) {
+            return ops.adddowncommentdata(ctdata.userId,cid, uid);
+        });*/
+        var b = a.then(function (ndata) {
+            return ops.commentsOfPost(pid);
+        });
+        return Promise.join(a, b, function (ndata, cdata) {
+            res.send({
+                ddata: cdata
+            });
+        });
+    }
+    , updatePost: function (pid, title, desc, url, res) {
+        var p = ops.updatePost(pid, title, desc, url);
+        p.then(function (data) {
+            res.sendStatus(200);
+        }, function (err) {
+            console.log(err);
+            throw err;
+        });
+    }
+    , updatePostNP: function (pid, title, desc, res) {
+        var p = ops.updatePostNP(pid, title, desc);
+        p.then(function (data) {
+            res.sendStatus(200);
+        }, function (err) {
+            console.log(err);
+            throw err;
+        });
+    }
+    , upComment: function (cid, com, res) {
+        ops.updateComment(cid, com).then(function (comdata) {
+            return ops.discussionOfPost(comdata.projectId);
+        }).then(function (cdata) {
+            res.send({
+                ddata: cdata
+            });
+        });
+    }
 };

@@ -6,7 +6,7 @@ app.controller('profilectrl', ['$scope', '$sessionStorage', '$location', '$windo
     profilefac.getProfile($scope.id).then(function (data) {
         $scope.profile = data.data.udata;
         $scope.posts = data.data.pdata;
-        $scope.comments = data.data.cdata;
+        $scope.comments = data.data.ddata;
     });
     $scope.showPrompt = function (ev) {
         $mdDialog.show({
@@ -20,7 +20,7 @@ app.controller('profilectrl', ['$scope', '$sessionStorage', '$location', '$windo
             profilefac.getProfile($scope.id).then(function (data) {
                 $scope.profile = data.data.udata;
                 $scope.posts = data.data.pdata;
-                $scope.comments = data.data.cdata;
+                $scope.comments = data.data.ddata;
             });
             $scope.user = $sessionStorage.get('user');
         }, function () {
@@ -35,11 +35,11 @@ app.controller('profilectrl', ['$scope', '$sessionStorage', '$location', '$windo
         $scope.cancel = function () {
             $mdDialog.cancel();
         }
-        $scope.firstname = $sessionStorage.get('user').firstname;
-        $scope.lastname = $sessionStorage.get('user').lastname;
+        //$scope.firstname = $sessionStorage.get('user').firstname;
+        $scope.lastname = $sessionStorage.get('user').name;
         $scope.bio = $sessionStorage.get('user').bio;
         $scope.profup = function () {
-            profilefac.updateProfile($scope.firstname, $scope.lastname, $scope.bio, $sessionStorage.get('user')._id).then(function (data) {
+            profilefac.updateProfile($scope.lastname, $sessionStorage.get('user')._id).then(function (data) {
                 $sessionStorage.put('user',data.data);
                 $scope.hide();
             });

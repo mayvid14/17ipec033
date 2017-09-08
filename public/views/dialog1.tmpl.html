@@ -27,12 +27,12 @@
                             <div ng-message="required">This is required!</div>
                         </div>
                     </md-input-container>
-                    <div> <img ng-show="postup.file.$valid" ngf-thumbnail="postPic" flex="50" flex-offset="25"> </div>
+                    <div> </div>
                 </div>
                 <div flex>
                     <md-input-container>
-                        <md-button class="md-fab" ngf-select ng-model="postPic" accept="image/*" name="file" ngf-max-size="10MB">
-                            <md-tooltip md-direction="right">Attach a screenshot</md-tooltip>
+                        <md-button class="md-fab" ngf-select ng-model="filer" name="file" ngf-max-size="10MB">
+                            <md-tooltip md-direction="right">Attach a file</md-tooltip>
                             <md-icon>photo</md-icon>
                         </md-button>
                     </md-input-container>

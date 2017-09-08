@@ -21,4 +21,12 @@ app.controller('indexctrl', ['$scope', '$sessionStorage', '$window', '$mdSidenav
     },function(n,o,s){
         $scope.user = $sessionStorage.get('user');
     });
+    $scope.requests = [];
+    $scope.req = function(){
+        var item = $scope.request.trim();
+        if(item){
+            $scope.requests.push(item);
+        }
+        $scope.request = "";
+    }
 }]);

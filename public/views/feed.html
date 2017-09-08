@@ -1,14 +1,15 @@
-<md-toolbar layout="row" class="md-primary">
+<div>
+    <md-toolbar layout="row" class="md-primary">
     <div class="md-toolbar-tools">
         <md-button hide-gt-sm ng-click="toggle()">
-            <md-icon class="md-primary">menu</md-icon>17IPEC033</md-button> <span flex>Feed</span> </div>
+            <md-icon class="md-primary">menu</md-icon>17IPEC033</md-button> <span flex>Feed</span>
+        <md-input-container md-no-float class="md-block">
+           <label for="">Search projects</label>
+            <md-icon>search</md-icon>
+            <input ng-model="search"> </md-input-container>
+            <md-checkbox ng-model="sot">Sort by Date?</md-checkbox>
+    </div>
 </md-toolbar>
-<div>
-    <md-input-container md-no-float class="md-block">
-        <md-icon>search</md-icon>
-        <input ng-model="search" type="text" placeholder="Search projects">
-         </md-input-container><span flex></span>
-        <md-checkbox ng-model="sot">Sort by Date?</md-checkbox>
 </div>
 <md-list flex>
     <md-subheader class="md-no-sticky">Sorted by best first</md-subheader>

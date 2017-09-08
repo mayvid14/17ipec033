@@ -6,14 +6,15 @@
     <link rel="stylesheet" href="/nm/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/index.css"> 
-    <title>IPEC Hackathon 2017</title></head>
+    <link rel="stylesheet" href="../styles/index.css">
+    <title>IPEC Hackathon 2017</title>
+</head>
 
 <body ng-app="ipec" ng-controller="indexctrl">
-    <section layout="row" flex>
+    <section layout="row">
         <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="7">
             <md-toolbar layout-padding layout-align="center center">
-                <h2 class="md-display-3">17IPEC033</h2> </md-toolbar>
+                <span>17IPEC033</span> </md-toolbar>
             <md-content layout-padding>
                 <md-card>
                     <md-card-header>
@@ -38,13 +39,52 @@
                         </md-list>
                     </md-card-content>
                 </md-card>
+                <md-card hide-gt-sm>
+                    <md-card-header>
+                        <md-input-container>
+                            <label>Request a project!</label>
+                            <input ng-model="request">
+                            <md-button class="md-icon-button md-secondary" ng-click="req()">
+                                <md-icon class="md-primary">send</md-icon>
+                            </md-button>
+                        </md-input-container>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-list>
+                           <md-subheader>Request list</md-subheader>
+                            <md-list-item ng-repeat="reqs in requests">{{reqs}}</md-list-item>
+                        </md-list>
+                    </md-card-content>
+                </md-card>
             </md-content>
         </md-sidenav>
         <md-content flex>
             <ng-view></ng-view>
         </md-content>
+        <md-sidenav class="md-sidenav-right" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="7">
+            <md-toolbar layout-padding layout-align="center center">
+            </md-toolbar>
+            <md-content layout-padding>
+                <md-card>
+                    <md-card-header>
+                        <md-input-container>
+                            <label>Request a project!</label>
+                            <input ng-model="request">
+                            <md-button class="md-icon-button md-secondary" ng-click="req()">
+                                <md-icon class="md-primary">send</md-icon>
+                            </md-button>
+                        </md-input-container>
+                    </md-card-header>
+                    <md-card-content>
+                        <md-list>
+                           <md-subheader>Request list</md-subheader>
+                            <md-list-item ng-repeat="reqs in requests">{{reqs}}</md-list-item>
+                        </md-list>
+                    </md-card-content>
+                </md-card>
+            </md-content>
+        </md-sidenav>
     </section>
-    
     <script src="/nm/angular/angular.js"></script>
     <script src="/nm/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="/nm/angular-aria/angular-aria.js"></script>
